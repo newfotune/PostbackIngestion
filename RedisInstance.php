@@ -17,7 +17,10 @@
 
         public function addRequestToQueue($request) {
             $currentTime = time();
-            $this->client->set($currentTime, $request);
+            if ($this->client->set($currentTime, $request)) {
+                return true;
+            } 
+            return false;
         }
     }
 ?>
