@@ -50,12 +50,9 @@ func main() {
 			go processData(client, logger, keys)
 		}
 	}()
-
+	//keeps the program running indefinitely
 	for {
-		//time.Sleep(time.Millisecond * 3500)
-		//ticker.Stop()
 	}
-
 }
 
 /*
