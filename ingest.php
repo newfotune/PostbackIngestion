@@ -1,15 +1,8 @@
 <?php
-    //phpinfo();
    require_once("RequestObject.php");
    require("RedisInstance.php");
 
-   /*Predis\Autoloader::register();
-
-   $client = new Predis\client();
-   $client->set('foo', 'bar');
-   $value = $client->get('foo');
-
-   echo $value*/
+    $response = array();
     $revieved = json_decode(file_get_contents('php://input'), true);
 
     if (!isset($revieved["endpoint"], $revieved["data"]))  {
@@ -18,8 +11,14 @@
     }
     
     $request = new Request($revieved["endpoint"], $revieved["data"]);
-    //echo $request->getRequestJSON();
     
     $redis = new Redis();
-    $redis->addRequestToQueue($request->getRequestJSON());
+    if ($redis->addRequestToQueue($request->getRequestJSON())) {
+        $response['error'] = false;
+        $response['message'] = "Successfully queued request";
+    } else {
+        $response['error'] = true;
+        $response['message'] = "Failed to add request to Redis";
+    }
+    echo json_encode($response);
 ?>
