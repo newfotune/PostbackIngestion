@@ -31,7 +31,7 @@ var ticker *time.Ticker
 
 func main() {
 
-	client, err := createClient("localhost:6379", "evenkingscry!", 0)
+	client, err := createClient("localhost:1985", "evenkingscry!", 0)
 	if err != nil {
 		panicAndExit(err)
 	}

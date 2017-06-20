@@ -9,7 +9,7 @@
             $this->client = new Predis\Client(array(
                     "scheme" => "tcp",
                     "host" => "127.0.0.1",
-                    "port" => 6379,
+                    "port" => 1985,
                     "password" => "evenkingscry!")) or die;
             
         }
